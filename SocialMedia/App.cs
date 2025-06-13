@@ -8,7 +8,10 @@ namespace SocialMedia
 {
     internal class App
     {
-
+        // to-do :
+        // -smelle ut alle hovedfunksjoner (online brukere, friends list view fra main menu + CheckProfile(), osv)
+        // -trimme ubrukelig shit fra bl.a. User
+        // -legge til ekstra brukere i userbase??
         public static void Run()
         {
             var userbase = new List<User>
@@ -63,7 +66,7 @@ namespace SocialMedia
                         OnlineUsers(userbase, you);
                         break;
                     case "cheatmode":
-                        you.FriendsList().Add(userbase[1]);
+                        you.FriendsList().Add(userbase[1-7]);
                         break;
                     case "me":
                         Console.Clear();
@@ -87,7 +90,7 @@ namespace SocialMedia
 
             if (currentUser == profileUser)
             {
-                // Viewing own profile
+                // se på egen profil
                 Console.WriteLine(
                     "\nAvailable commands:\n'Edit' - Write a new description.\n'Friends' - Check your friends list\n'Exit' - Return to menu");
                 var selfProfileInput = Console.ReadLine().ToLower();
@@ -115,6 +118,7 @@ namespace SocialMedia
                         break;
                 }
             }
+            //se på annen profil (ikke venn)
             else if (!currentUser.FriendsList().Contains(profileUser))
             {
                 Console.WriteLine(
@@ -131,7 +135,7 @@ namespace SocialMedia
                             Console.WriteLine(
                                 $"{profileUser.Handle()} has accepted your friend request!\nPress any key to continue...");
                             currentUser.FriendsList().Add(profileUser);
-                            profileUser.isfriend = true;
+                            //profileUser.isfriend = true; HUSK trenger ikke denne boolen lenger, bruk friendslist
                         }
                         else
                         {
@@ -150,6 +154,7 @@ namespace SocialMedia
                         break;
                 }
             } else { 
+                // se på annen profil (venn)
                 Console.WriteLine(
                     "\nAvailable commands:\n'Remove' - Remove user as friend.\n'Friends' - Check user's friends list\n'Exit' - Return to menu");
                 var strangerProfileInput = Console.ReadLine().ToLower();
@@ -164,7 +169,7 @@ namespace SocialMedia
                             Console.WriteLine(
                                 $"{profileUser.Handle()} has been removed from your friends list.\nPress any key to continue...");
                             currentUser.FriendsList().Remove(profileUser);
-                            profileUser.isfriend = false;
+                            //profileUser.isfriend = false; HUSK trenger ikke denne boolen lenger, bruk friendslist
                         }
                         else
                         {
@@ -185,7 +190,6 @@ namespace SocialMedia
             }
         }
 
-
         static int FriendCounter(User user)
                 {
                     int friendCount = 0;
@@ -195,8 +199,10 @@ namespace SocialMedia
                     }
                     return friendCount;
                 }
+
         public static void OnlineUsers(List<User> userbase, User currentUser)
         {
+            // trenger måte å sjekke input + kjøre en CheckProfile() med korresponderende bruker
             var usercount = 0;
             Console.Clear();
             Console.WriteLine(
@@ -205,8 +211,8 @@ namespace SocialMedia
             {
                 var friendstring = "";
                 var userstring = "";
-                //is user friend
 
+                //is user friend
                 if (currentUser.FriendsList().Contains(userbase[i]))
                 {
                     friendstring = "[This user is your friend]";
