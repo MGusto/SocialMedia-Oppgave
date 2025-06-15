@@ -54,8 +54,8 @@ namespace SocialMedia
                 Console.WriteLine($"Public handle: {you.Handle()}");
                 Console.WriteLine(
                     "\n\nAvailable commands:\n'Online' - Check online users\n'Me' - Check your own profile\n'Friends' - Check your friends list\n'Exit' - Exit the program");
-                var commandinput = Console.ReadLine().ToLower();
-                switch (commandinput)
+                var input = Console.ReadLine().ToLower();
+                switch (input)
                 {
                     case "online":
                         Console.Clear();
@@ -87,7 +87,7 @@ namespace SocialMedia
             //viser "online" brukere, kan legge til venner herfra
             while (true)
             {
-                var usercount = 0;
+                var usercount = 1;
                 Console.Clear();
                 Console.WriteLine(
                     "- Online users - \n\nAvailable commands:\nType in user handle (case sensitive) or corresponding number to check their profile.\n'Exit' - Return to previous page\n\n");
@@ -158,8 +158,8 @@ namespace SocialMedia
                 // se på egen profil
                 Console.WriteLine(
                     "\nAvailable commands:\n'Edit' - Write a new description.\n'Friends' - Check your friends list\n'Exit' - Return to previous page");
-                var selfProfileInput = Console.ReadLine().ToLower();
-                switch (selfProfileInput)
+                var input = Console.ReadLine().ToLower();
+                switch (input)
                 {
                     case "edit":
                         Console.Clear();
@@ -185,8 +185,8 @@ namespace SocialMedia
             {
                 Console.WriteLine(
                     "\nAvailable commands:\n'Add' - Add user as friend.\n'Friends' - Check user's friends list\n'Exit' - Return to previous page");
-                var strangerProfileInput = Console.ReadLine().ToLower();
-                switch (strangerProfileInput)
+                var input = Console.ReadLine().ToLower();
+                switch (input)
                 {
                     case "add":
                         Console.Clear();
@@ -202,8 +202,8 @@ namespace SocialMedia
                 // se på annen profil (venn)
                 Console.WriteLine(
                     "\nAvailable commands:\n'Remove' - Remove user as friend.\n'Friends' - Check user's friends list\n'Exit' - Return to previous page");
-                var strangerProfileInput = Console.ReadLine().ToLower();
-                switch (strangerProfileInput)
+                var input = Console.ReadLine().ToLower();
+                switch (input)
                 {
                     case "remove":
                         Console.Clear();
@@ -225,7 +225,7 @@ namespace SocialMedia
             {
                 Console.Clear();
                 var profileFriends = profileUser.FriendsList();
-                var friendcount = 0;
+                var friendcount = 1;
                 Console.Clear();
                 Console.WriteLine(
                     $"- {profileUser.Handle()}'s Friends List - \n\nAvailable commands:\nType in user handle (case sensitive) or corresponding number to check their profile.\n'Exit' - Return to previous page\n\n");
@@ -235,7 +235,7 @@ namespace SocialMedia
                     friendcount++;
                     Console.WriteLine($"{i}). {profileFriends[i].Handle()} - Online\n");
                 }
-                Console.WriteLine($"{profileUser.Handle()} has " + FriendCounter(profileUser) + " friend(s).\n");
+                Console.WriteLine($"{profileUser.Handle()} has {friendcount} friend(s).\n");
                 var input = Console.ReadLine();
                 if (input == null) continue;
                 input = input.Trim();
@@ -277,8 +277,8 @@ namespace SocialMedia
         {
             Console.Clear();
             Console.WriteLine($"Do you wish to send {profileUser.Handle()} a friend request?\n(Y / N)\n");
-            var requestFriendship = Console.ReadLine().ToLower();
-            if (requestFriendship == "y")
+            var input = Console.ReadLine().ToLower();
+            if (input == "y")
             {
                 Console.WriteLine(
                     $"{profileUser.Handle()} has accepted your friend request!\nPress any key to continue...");
@@ -298,8 +298,8 @@ namespace SocialMedia
         {
             Console.Clear();
             Console.WriteLine($"Do you wish to remove {profileUser.Handle()} from your friends list?\n(Y / N)\n");
-            var requestFriendship = Console.ReadLine().ToLower();
-            if (requestFriendship == "y")
+            var input = Console.ReadLine().ToLower();
+            if (input == "y")
             {
                 Console.WriteLine(
                     $"{profileUser.Handle()} has been removed from your friends list.\nPress any key to continue...");
@@ -314,7 +314,7 @@ namespace SocialMedia
             }
         }
 
-        //metode for å telle antall venner
+        //metode for å telle antall venner utenfor CheckFriends() metoden
         static int FriendCounter(User user)
                 {
                     int friendCount = 0;
