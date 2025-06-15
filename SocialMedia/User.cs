@@ -11,20 +11,13 @@ namespace SocialMedia
         private string _handle;
         private string _description;
         private List<User> _friendslist;
-        private bool _isfriend;
-        private bool _isuser;
-        public User(string handle, string description, bool isfriend, bool isuser)
+
+        public User(string handle, string description)
         {
             _handle = handle;
             _description = description;
             _friendslist = new List<User>();
-            _isfriend = isfriend;
-            _isuser = isuser;
         }
-
-        public bool isuser { get; }
-
-        public bool isfriend { get; set; }
 
         public List<User> FriendsList()
         {
